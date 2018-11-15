@@ -20,7 +20,7 @@ setup(
     long_description=long_description,
     author="Michal Belica",
     author_email="miso.belica@gmail.com",
-    url="https://github.com/miso-belica/sumy",
+    url="https://github.com/kimbyungnam/sumy",
     license="Apache License, Version 2.0",
     keywords=[
         "data mining",
