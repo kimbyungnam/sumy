@@ -66,10 +66,10 @@ AVAILABLE_METHODS = {
 def main(args=None):
     args = docopt(to_string(__doc__), args, version=__version__)
     summarizer, parser, items_count = handle_arguments(args)
-
+    
     for sentence in summarizer(parser.document, items_count):
         if PY3:
-            print(to_unicode(sentence))
+              print(to_unicode(sentence))
         else:
             print(to_bytes(sentence))
 
@@ -110,6 +110,7 @@ def handle_arguments(args, default_input_stream=sys.stdin):
     stemmer = Stemmer(language)
 
     summarizer_class = next(cls for name, cls in AVAILABLE_METHODS.items() if args[name])
+    
     summarizer = build_summarizer(summarizer_class, stop_words, stemmer, parser)
 
     return summarizer, parser, items_count

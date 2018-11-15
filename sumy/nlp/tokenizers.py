@@ -13,7 +13,7 @@ from ..utils import normalize_language
 
 class DefaultWordTokenizer(object):
     def tokenize(self, text):
-        print("tlqkf\n",nltk.word_tokenize(text),"\ntlqkf\n")
+#         print("DefaultWordTokenizer")
         return nltk.word_tokenize(text)
 
 
@@ -37,12 +37,14 @@ class ChineseWordTokenizer:
 
 class KoreanWordTokenizer:
     def tokenize(self, text):
+#         print("KoreanWordTokenizer\n")
         try:
             from konlpy.tag import Kkma
         except ImportError as e:
             raise ValueError("Korean tokenizer requires konlpy. Please, install it by command 'pip install konlpy'.")
+#         print(text)
         kkma = Kkma()
-        print("token---",kkma.nouns(text),"done\n")
+#         print("token---",kkma.nouns(text),"done\n")
         return kkma.nouns(text)
                 
 
@@ -65,13 +67,13 @@ class Tokenizer(object):
     SPECIAL_SENTENCE_TOKENIZERS = {
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
-        'korean': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
+        'korean': nltk.RegexpTokenizer('[^　！？.]*[！？.]')
     }
 
     SPECIAL_WORD_TOKENIZERS = {
         'japanese': JapaneseWordTokenizer(),
         'chinese': ChineseWordTokenizer(),
-        'korean': KoreanWordTokenizer()
+         'korean': KoreanWordTokenizer()
     }
 
     def __init__(self, language):
@@ -81,7 +83,6 @@ class Tokenizer(object):
         tokenizer_language = self.LANGUAGE_ALIASES.get(language, language)
         self._sentence_tokenizer = self._get_sentence_tokenizer(tokenizer_language)
         self._word_tokenizer = self._get_word_tokenizer(tokenizer_language)
-        print(language,"tlqkf\n")
 
     @property
     def language(self):
@@ -101,7 +102,6 @@ class Tokenizer(object):
 
     def _get_word_tokenizer(self, language):
         if language in self.SPECIAL_WORD_TOKENIZERS:
-            print("\n",language,"\n")
             return self.SPECIAL_WORD_TOKENIZERS[language]
         else:
             return DefaultWordTokenizer()
@@ -111,11 +111,12 @@ class Tokenizer(object):
             extra_abbreviations = self.LANGUAGE_EXTRA_ABREVS.get(self._language, [])
             self._sentence_tokenizer._params.abbrev_types.update(extra_abbreviations)
         sentences = self._sentence_tokenizer.tokenize(to_unicode(paragraph))
+#         print("para : ",paragraph,"\ntokenized : ", sentences)
         return tuple(map(unicode.strip, sentences))
 
     def to_words(self, sentence):
         words = self._word_tokenizer.tokenize(to_unicode(sentence))
-        print("qwerqwe\n\n",words,"\n")
+#         print("qwerqwe\n\n",words,"\n")
         return tuple(filter(self._is_word, words))
 
     def _is_word(self, word):
