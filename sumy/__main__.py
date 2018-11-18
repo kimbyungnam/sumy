@@ -69,7 +69,7 @@ def main(args=None):
     
     for sentence in summarizer(parser.document, items_count):
         if PY3:
-              print(to_unicode(sentence))
+              print(to_unicode(sentence),"\n")
         else:
             print(to_bytes(sentence))
 
