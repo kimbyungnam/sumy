@@ -22,10 +22,12 @@ class HtmlParser(DocumentParser):
 
     @classmethod
     def from_string(cls, string, url, tokenizer):
+        print("string cls : ",cls,"\n")
         return cls(string, tokenizer, url)
 
     @classmethod
     def from_file(cls, file_path, url, tokenizer):
+        print("file cls : ",cls,"\n")
         with open(file_path, "rb") as file:
             return cls(file.read(), tokenizer, url)
 
@@ -82,7 +84,7 @@ class HtmlParser(DocumentParser):
         # "s", "samp", "strike", "strong", "sub", "sup", "tt", "u", "ul", "var",
 
         annotated_text = self._article.main_text
-
+        test = 0
         paragraphs = []
         for paragraph in annotated_text:
             sentences = []
@@ -97,6 +99,10 @@ class HtmlParser(DocumentParser):
 
             new_sentences = self.tokenize_sentences(current_text)
             sentences.extend(Sentence(s, self._tokenizer) for s in new_sentences)
+            test += len(sentences)
             paragraphs.append(Paragraph(sentences))
-
+        
+        if test < 30:
+            print("30!!!\n")
+            exit(1)
         return ObjectDocumentModel(paragraphs)

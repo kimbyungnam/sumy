@@ -27,6 +27,7 @@ class PlaintextParser(DocumentParser):
 
     @classmethod
     def from_string(cls, string, tokenizer):
+        print("cls : ",cls)
         return cls(string, tokenizer)
 
     @classmethod
@@ -58,21 +59,28 @@ class PlaintextParser(DocumentParser):
     def document(self):
         current_paragraph = []
         paragraphs = []
+        test = 0
         for line in self._text.splitlines():
             line = line.strip()
             if line.isupper():
                 heading = Sentence(line, self._tokenizer, is_heading=True)
                 current_paragraph.append(heading)
+
             elif not line and current_paragraph:
                 sentences = self._to_sentences(current_paragraph)
                 paragraphs.append(Paragraph(sentences))
                 current_paragraph = []
+                test += len(sentences)
             elif line:
                 current_paragraph.append(line)
 
         sentences = self._to_sentences(current_paragraph)
         paragraphs.append(Paragraph(sentences))
-
+        test += len(sentences)
+        if(test < 30):
+            print("30!!\n")
+            exit(1)
+        
         return ObjectDocumentModel(paragraphs)
 
     def _to_sentences(self, lines):
@@ -94,7 +102,7 @@ class PlaintextParser(DocumentParser):
         if text:
             sentences = self.tokenize_sentences(text)
             sentence_objects += map(self._to_sentence, sentences)
-
+        print("sentence #: ",len(sentence_objects),"\n")
         return sentence_objects
 
     def _to_sentence(self, text):
