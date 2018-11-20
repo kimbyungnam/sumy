@@ -102,7 +102,7 @@ class HtmlParser(DocumentParser):
             test += len(sentences)
             paragraphs.append(Paragraph(sentences))
         
-        if test < 30:
-            print("30!!!\n")
+        if test < 10:
+            print("10!!!\n")
             exit(1)
         return ObjectDocumentModel(paragraphs)

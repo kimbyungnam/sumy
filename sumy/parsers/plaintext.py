@@ -77,8 +77,8 @@ class PlaintextParser(DocumentParser):
         sentences = self._to_sentences(current_paragraph)
         paragraphs.append(Paragraph(sentences))
         test += len(sentences)
-        if(test < 30):
-            print("30!!\n")
+        if(test < 10):
+            print("10!!\n")
             exit(1)
         
         return ObjectDocumentModel(paragraphs)
