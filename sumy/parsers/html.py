@@ -103,6 +103,6 @@ class HtmlParser(DocumentParser):
             paragraphs.append(Paragraph(sentences))
         
         if test < 10:
-            print("10!!!\n")
+            print("10 문장 이하는 처리하지 않습니다\n")
             exit(1)
         return ObjectDocumentModel(paragraphs)

@@ -78,7 +78,7 @@ class PlaintextParser(DocumentParser):
         paragraphs.append(Paragraph(sentences))
         test += len(sentences)
         if(test < 10):
-            print("10!!\n")
+            print("10 문장 이하는 처리하지 않습니다\n")
             exit(1)
         
         return ObjectDocumentModel(paragraphs)
@@ -102,7 +102,7 @@ class PlaintextParser(DocumentParser):
         if text:
             sentences = self.tokenize_sentences(text)
             sentence_objects += map(self._to_sentence, sentences)
-        print("sentence #: ",len(sentence_objects),"\n")
+
         return sentence_objects
 
     def _to_sentence(self, text):
