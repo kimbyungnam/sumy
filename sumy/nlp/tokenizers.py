@@ -77,7 +77,8 @@ class Tokenizer(object):
     SPECIAL_SENTENCE_TOKENIZERS = {
         'japanese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
         'chinese': nltk.RegexpTokenizer('[^　！？。]*[！？。]'),
-        'korean': KoreanSentencesTokenizer()
+        #'korean': KoreanSentencesTokenizer()
+        'korean': nltk.RegexpTokenizer('[^！？.]*[！？.]')
     }
 
     SPECIAL_WORD_TOKENIZERS = {
@@ -102,7 +103,8 @@ class Tokenizer(object):
         if language in self.SPECIAL_SENTENCE_TOKENIZERS:
             return self.SPECIAL_SENTENCE_TOKENIZERS[language]
         try:
-            path = to_string("tokenizers/punkt/%s.pickle") % to_string(language)
+            path = to_string("/home/dvlab/nltk_data/tokenizers/punkt/%s.pickle") % to_string(language)
+            print(path)
             return nltk.data.load(path)
         except (LookupError, zipfile.BadZipfile):
             raise LookupError(
@@ -120,8 +122,12 @@ class Tokenizer(object):
         if hasattr(self._sentence_tokenizer, '_params'):
             extra_abbreviations = self.LANGUAGE_EXTRA_ABREVS.get(self._language, [])
             self._sentence_tokenizer._params.abbrev_types.update(extra_abbreviations)
+#         print(self._sentence_tokenizer)
         sentences = self._sentence_tokenizer.tokenize(to_unicode(paragraph))
-#         print("para : ",paragraph,"\ntokenized : ", sentences)
+        
+#         for sentence in sentences:
+#             print("\nsentence: %s\n"%sentence)
+        
         return tuple(map(unicode.strip, sentences))
 
     def to_words(self, sentence):

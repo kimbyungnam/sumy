@@ -27,7 +27,6 @@ class PlaintextParser(DocumentParser):
 
     @classmethod
     def from_string(cls, string, tokenizer):
-        print("cls : ",cls)
         return cls(string, tokenizer)
 
     @classmethod
@@ -77,9 +76,9 @@ class PlaintextParser(DocumentParser):
         sentences = self._to_sentences(current_paragraph)
         paragraphs.append(Paragraph(sentences))
         test += len(sentences)
-        if(test < 10):
-            print("10 문장 이하는 처리하지 않습니다\n")
-            exit(1)
+#         if(test < 10):
+#             print("10 문장 이하는 처리하지 않습니다\n")
+#             exit(1)
         
         return ObjectDocumentModel(paragraphs)
 

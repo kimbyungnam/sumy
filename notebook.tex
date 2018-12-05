@@ -1,0 +1,1192 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ming2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{absolute\PYZus{}import}
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{division}\PY{p}{,} \PY{n}{print\PYZus{}function}\PY{p}{,} \PY{n}{unicode\PYZus{}literals}
+        
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        
+        \PY{k+kn}{from} \PY{n+nn}{itertools} \PY{k}{import} \PY{n}{chain}
+        \PY{k+kn}{from} \PY{n+nn}{docopt} \PY{k}{import} \PY{n}{docopt}
+        \PY{k+kn}{from} \PY{n+nn}{sumy} \PY{k}{import} \PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{ItemsCount}\PY{p}{,} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{,} \PY{n}{fetch\PYZus{}url}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{TfDocumentModel}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{\PYZus{}compat} \PY{k}{import} \PY{n}{to\PYZus{}string}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{nlp}\PY{n+nn}{.}\PY{n+nn}{tokenizers} \PY{k}{import} \PY{n}{Tokenizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{parsers}\PY{n+nn}{.}\PY{n+nn}{html} \PY{k}{import} \PY{n}{HtmlParser}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{parsers}\PY{n+nn}{.}\PY{n+nn}{plaintext} \PY{k}{import} \PY{n}{PlaintextParser}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{random} \PY{k}{import} \PY{n}{RandomSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{luhn} \PY{k}{import} \PY{n}{LuhnSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{edmundson} \PY{k}{import} \PY{n}{EdmundsonSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{lsa} \PY{k}{import} \PY{n}{LsaSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{text\PYZus{}rank} \PY{k}{import} \PY{n}{TextRankSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{lex\PYZus{}rank} \PY{k}{import} \PY{n}{LexRankSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{sum\PYZus{}basic} \PY{k}{import} \PY{n}{SumBasicSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{summarizers}\PY{n+nn}{.}\PY{n+nn}{kl} \PY{k}{import} \PY{n}{KLSummarizer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{nlp}\PY{n+nn}{.}\PY{n+nn}{stemmers} \PY{k}{import} \PY{n}{Stemmer}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{evaluation} \PY{k}{import} \PY{n}{precision}\PY{p}{,} \PY{n}{recall}\PY{p}{,} \PY{n}{f\PYZus{}score}\PY{p}{,} \PY{n}{cosine\PYZus{}similarity}\PY{p}{,} \PY{n}{unit\PYZus{}overlap}
+        \PY{k+kn}{from} \PY{n+nn}{sumy}\PY{n+nn}{.}\PY{n+nn}{evaluation} \PY{k}{import} \PY{n}{rouge\PYZus{}1}\PY{p}{,} \PY{n}{rouge\PYZus{}2}\PY{p}{,} \PY{n}{rouge\PYZus{}l\PYZus{}sentence\PYZus{}level}\PY{p}{,} \PY{n}{rouge\PYZus{}l\PYZus{}summary\PYZus{}level} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{PARSERS} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{html}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{HtmlParser}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{plaintext}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{PlaintextParser}\PY{p}{,}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{build\PYZus{}random}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{RandomSummarizer}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}luhn}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{LuhnSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}edmundson}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{EdmundsonSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{null\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{bonus\PYZus{}words} \PY{o}{=} \PY{n}{parser}\PY{o}{.}\PY{n}{significant\PYZus{}words}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stigma\PYZus{}words} \PY{o}{=} \PY{n}{parser}\PY{o}{.}\PY{n}{stigma\PYZus{}words}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}lsa}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{LsaSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}text\PYZus{}rank}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{TextRankSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}lex\PYZus{}rank}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{LexRankSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}sum\PYZus{}basic}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{SumBasicSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}kl}\PY{p}{(}\PY{n}{parser}\PY{p}{,} \PY{n}{language}\PY{p}{)}\PY{p}{:}
+            \PY{n}{summarizer} \PY{o}{=} \PY{n}{KLSummarizer}\PY{p}{(}\PY{n}{Stemmer}\PY{p}{(}\PY{n}{language}\PY{p}{)}\PY{p}{)}
+            \PY{n}{summarizer}\PY{o}{.}\PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n}{get\PYZus{}stop\PYZus{}words}\PY{p}{(}\PY{n}{language}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{summarizer}
+        
+        \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{evaluated\PYZus{}sentences}\PY{p}{,} \PY{n}{reference\PYZus{}sentences}\PY{p}{)}\PY{p}{:}
+            \PY{n}{evaluated\PYZus{}words} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{chain}\PY{p}{(}\PY{o}{*}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{words} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{evaluated\PYZus{}sentences}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{reference\PYZus{}words} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{chain}\PY{p}{(}\PY{o}{*}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{words} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{reference\PYZus{}sentences}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{evaluated\PYZus{}model} \PY{o}{=} \PY{n}{TfDocumentModel}\PY{p}{(}\PY{n}{evaluated\PYZus{}words}\PY{p}{)}
+            \PY{n}{reference\PYZus{}model} \PY{o}{=} \PY{n}{TfDocumentModel}\PY{p}{(}\PY{n}{reference\PYZus{}words}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{evaluated\PYZus{}model}\PY{p}{,} \PY{n}{reference\PYZus{}model}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}unit\PYZus{}overlap}\PY{p}{(}\PY{n}{evaluated\PYZus{}sentences}\PY{p}{,} \PY{n}{reference\PYZus{}sentences}\PY{p}{)}\PY{p}{:}
+            \PY{n}{evaluated\PYZus{}words} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{chain}\PY{p}{(}\PY{o}{*}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{words} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{evaluated\PYZus{}sentences}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{reference\PYZus{}words} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{chain}\PY{p}{(}\PY{o}{*}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{words} \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{reference\PYZus{}sentences}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{evaluated\PYZus{}model} \PY{o}{=} \PY{n}{TfDocumentModel}\PY{p}{(}\PY{n}{evaluated\PYZus{}words}\PY{p}{)}
+            \PY{n}{reference\PYZus{}model} \PY{o}{=} \PY{n}{TfDocumentModel}\PY{p}{(}\PY{n}{reference\PYZus{}words}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{unit\PYZus{}overlap}\PY{p}{(}\PY{n}{evaluated\PYZus{}model}\PY{p}{,} \PY{n}{reference\PYZus{}model}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{AVAILABLE\PYZus{}METHODS} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{luhn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}luhn}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{edmundson}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}edmundson}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lsa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}lsa}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text\PYZhy{}rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}text\PYZus{}rank}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lex\PYZhy{}rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}lex\PYZus{}rank}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum\PYZhy{}basic}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}sum\PYZus{}basic}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{build\PYZus{}kl}\PY{p}{,}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{n}{AVAILABLE\PYZus{}EVALUATIONS} \PY{o}{=} \PY{p}{(}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{precision}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{recall}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F\PYZhy{}score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{f\PYZus{}score}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cosine similarity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{evaluate\PYZus{}cosine\PYZus{}similarity}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cosine similarity (document)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{n}{evaluate\PYZus{}cosine\PYZus{}similarity}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unit overlap}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{evaluate\PYZus{}unit\PYZus{}overlap}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unit overlap (document)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{n}{evaluate\PYZus{}unit\PYZus{}overlap}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rouge\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{rouge\PYZus{}1}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rouge\PYZhy{}2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{rouge\PYZus{}2}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rouge\PYZhy{}L (Sentence Level)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{rouge\PYZus{}l\PYZus{}sentence\PYZus{}level}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rouge\PYZhy{}L (Summary Level)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{rouge\PYZus{}l\PYZus{}summary\PYZus{}level}\PY{p}{)}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}text = \PYZsq{}From her special numbers to TV?appearances, Bollywood actor Malaika Arora Khan has managed to carve her own identity. The actor, who made her debut in the Hindi film industry with the blockbuster debut opposite Shah Rukh Khan in Chaiyya Chaiyya from Dil Se (1998), is still remembered for the song. However, for trolls, she is a woman first and what matters right now is that she divorced a ?rich man?.  On Wednesday, Malaika Arora shared a gorgeous picture of herself on Instagram and a follower decided to troll her for using her ?alumni? (read alimony) money to wear ?short clothes and going to gym or salon?. Little did he/she know that the Munni Badnam star would reply with the perfect comeback. Take a look at the interaction:     Super excited to be affiliated with Khanna Jewellers @khannajewellerskj as their brand ambassador. Crafted to perfection, their stunning statement jewellery is a must have for every jewellery lover. \PYZsh{}khannajewellers...\PYZsh{}maksquad?? \PYZsh{}hair @hairbypriyanka \PYZsh{}stylist @manekaharisinghani \PYZsh{}manager @ektakauroberoi \PYZsh{}mua? @subbu28 \PYZsh{}photographer @prasdnaik A post shared by Malaika Arora Khan (@malaikaarorakhanofficial) on Aug 2, 2017 at 6:20am PDT Then, Malaika decided to reply: The entire conversation only proves that no matter if a woman is successful, she will be attacked the moment she decides to step out of bounds the society decided for her. Apart from being a successful woman who lives life on her own terms, Malaika has literally played all the roles traditionally prescribed for a woman \PYZhy{} she married quite early, had a son and raised him and was always around with the ?khandan?. But then, she got divorced and alimony is the taunt being thrown at her. The details of the alimony are only known to Malaika, her husband Arbaaz Khan and perhaps the family. The couple has handled the divorce with the utmost dignity. But we can vouch for the fact that she did not  need an alimony to buy clothes (short or not, her choice), go on vacations and enjoy her life. If anything, she is as successful, if not more, than her ex\PYZhy{}husband.What happened between Arbaaz and Malaika is their personal concern. But to claim that Malaika married and then divorced Arbaaz for money doesn?t hold water. For those who do not agree, please get a course in feminism and for others, here?s a playlist of some of her most popular songs. Follow @htshowbiz for more\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}reference = \PYZsq{}The Administration of Union Territory Daman and Diu has revoked its order that made it compulsory for women to tie rakhis to their male colleagues on the occasion of Rakshabandhan on August 7. The administration was forced to withdraw the decision within 24 hours of issuing the circular after it received flak from employees and was slammed on social media.\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k}{import} \PY{n}{Series}\PY{p}{,} \PY{n}{DataFrame}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{n}{text\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{news\PYZus{}summary.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{text\PYZus{}all} \PY{o}{=} \PY{n}{text\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{reference\PYZus{}all} \PY{o}{=} \PY{n}{text\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ a, b }\KeywordTok{in}\NormalTok{ AVAILABLE_METHODS.items():}
+\NormalTok{    names }\OperatorTok{=} \StringTok{"result_"}\OperatorTok{+}\NormalTok{a}\OperatorTok{+}\StringTok{".csv"}
+\NormalTok{    raw_data }\OperatorTok{=}\NormalTok{ \{}\StringTok{'Precision'}\NormalTok{:[], }\StringTok{'Recall'}\NormalTok{:[], }\StringTok{'F-score'}\NormalTok{:[], }\StringTok{'Cosine similarity'}\NormalTok{:[], }\StringTok{'Cosine similarity (document)'}\NormalTok{:[], }\StringTok{'Unit overlap'}\NormalTok{:[], }\StringTok{'Unit overlap (document)'}\NormalTok{:[], }\StringTok{'Rouge-1'}\NormalTok{:[], }\StringTok{'Rouge-2'}\NormalTok{:[], }\StringTok{'Rouge-L (Sentence Level)'}\NormalTok{:[], }\StringTok{'Rouge-L (Summary Level)'}\NormalTok{:[]\}}
+\NormalTok{    columns }\OperatorTok{=}\NormalTok{ [i[}\DecValTok{0}\NormalTok{] }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ AVAILABLE_EVALUATIONS]}
+\NormalTok{    df }\OperatorTok{=}\NormalTok{ DataFrame(raw_data, columns }\OperatorTok{=}\NormalTok{ columns)}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\BuiltInTok{len}\NormalTok{(text_all)):}
+        \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{==} \DecValTok{1056}\NormalTok{: }\ControlFlowTok{continue}
+\NormalTok{        summarizer_builder }\OperatorTok{=}\NormalTok{ b}
+\NormalTok{        parser }\OperatorTok{=}\NormalTok{ PlaintextParser(text_all[i], Tokenizer(}\StringTok{'english'}\NormalTok{))}
+
+\NormalTok{        summarizer }\OperatorTok{=}\NormalTok{ summarizer_builder(parser, }\StringTok{'english'}\NormalTok{)}
+\NormalTok{        document }\OperatorTok{=}\NormalTok{ parser.document}
+\NormalTok{        items_count }\OperatorTok{=}\NormalTok{ ItemsCount(}\DecValTok{2}\NormalTok{)}
+\NormalTok{        reference_summary }\OperatorTok{=}\NormalTok{ reference_all[i]}
+\NormalTok{        evaluated_sentences }\OperatorTok{=}\NormalTok{ summarizer(document, items_count)}
+\NormalTok{        reference_document }\OperatorTok{=}\NormalTok{ PlaintextParser.from_string(reference_summary,Tokenizer(}\StringTok{"english"}\NormalTok{))}
+\NormalTok{        reference_sentences }\OperatorTok{=}\NormalTok{ reference_document.document.sentences}
+\NormalTok{        raw_data }\OperatorTok{=}\NormalTok{ \{\}}
+        \ControlFlowTok{for}\NormalTok{ name, evaluate_document, evaluate }\KeywordTok{in}\NormalTok{ AVAILABLE_EVALUATIONS:}
+            \ControlFlowTok{if}\NormalTok{ evaluate_document:}
+\NormalTok{                result }\OperatorTok{=}\NormalTok{ evaluate(evaluated_sentences, document.sentences)}
+            \ControlFlowTok{else}\NormalTok{:}
+                \ControlFlowTok{try}\NormalTok{ :}
+\NormalTok{                    result }\OperatorTok{=}\NormalTok{ evaluate(evaluated_sentences, reference_sentences)}
+                \ControlFlowTok{except}\NormalTok{ :}
+                    \ControlFlowTok{break}
+\NormalTok{            raw_data[name]}\OperatorTok{=}\BuiltInTok{float}\NormalTok{(result)}
+        \ControlFlowTok{if}\NormalTok{(}\BuiltInTok{len}\NormalTok{(raw_data) }\OperatorTok{==} \DecValTok{11}\NormalTok{):}
+\NormalTok{            df.loc[}\BuiltInTok{len}\NormalTok{(df)] }\OperatorTok{=}\NormalTok{ raw_data}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"================================ "}\OperatorTok{+}\NormalTok{ a }\OperatorTok{+} \StringTok{" done! =============================="}\NormalTok{)}
+\NormalTok{    df.to_csv(names)}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{uxc54cuxace0uxb9acuxc998uxbcc4-uxadf8uxb798uxd504}{%
+\section{알고리즘별
+그래프}\label{uxc54cuxace0uxb9acuxc998uxbcc4-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{col} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{AVAILABLE\PYZus{}EVALUATIONS}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} luhn}
+        \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}luhn.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}luhn}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} edmundson}
+        \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}edmundson.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}edmundson}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} lsa}
+        \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}lsa.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}lsa}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} text\PYZhy{}rank}
+        \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}text\PYZhy{}rank.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} lex\PYZhy{}rank}
+        \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}lex\PYZhy{}rank.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} sum\PYZhy{}basic}
+        \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}sum\PYZhy{}basic.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}kl}
+        \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{result\PYZus{}kl.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+        \PY{n}{static\PYZus{}kl}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{luhn-uxadf8uxb798uxd504}{%
+\subsection{luhn 그래프}\label{luhn-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{luhn }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{edmundson-uxadf8uxb798uxd504}{%
+\subsection{edmundson 그래프}\label{edmundson-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{edmundson }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{lsa-uxadf8uxb798uxd504}{%
+\subsection{lsa 그래프}\label{lsa-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lsa }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{text-rank-uxadf8uxb798uxd504}{%
+\subsection{text-rank 그래프}\label{text-rank-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text\PYZhy{}rank }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{lex-rank-uxadf8uxb798uxd504}{%
+\subsection{lex-rank 그래프}\label{lex-rank-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lex\PYZhy{}rank }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{sum-basic-uxadf8uxb798uxd504}{%
+\subsection{sum-basic 그래프}\label{sum-basic-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sum\PYZhy{}basic }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{kl-uxadf8uxb798uxd504}{%
+\subsection{kl 그래프}\label{kl-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+             
+             \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+             \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kl }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{uxd55cuxad6duxc5b4}{%
+\section{한국어}\label{uxd55cuxad6duxc5b4}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{kor\PYZus{}text} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{news\PYZus{}ko.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CP949}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{kor\PYZus{}reference\PYZus{}all} \PY{o}{=} \PY{n}{kor\PYZus{}text}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{kor\PYZus{}text\PYZus{}all}\PY{o}{=}\PY{n}{kor\PYZus{}text}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ a, b }\KeywordTok{in}\NormalTok{ AVAILABLE_METHODS.items():}
+\NormalTok{    names }\OperatorTok{=} \StringTok{"kor_result_"}\OperatorTok{+}\NormalTok{a}\OperatorTok{+}\StringTok{".csv"}
+\NormalTok{    raw_data }\OperatorTok{=}\NormalTok{ \{}\StringTok{'Precision'}\NormalTok{:[], }\StringTok{'Recall'}\NormalTok{:[], }\StringTok{'F-score'}\NormalTok{:[], }\StringTok{'Cosine similarity'}\NormalTok{:[], }\StringTok{'Cosine similarity (document)'}\NormalTok{:[], }\StringTok{'Unit overlap'}\NormalTok{:[], }\StringTok{'Unit overlap (document)'}\NormalTok{:[], }\StringTok{'Rouge-1'}\NormalTok{:[], }\StringTok{'Rouge-2'}\NormalTok{:[], }\StringTok{'Rouge-L (Sentence Level)'}\NormalTok{:[], }\StringTok{'Rouge-L (Summary Level)'}\NormalTok{:[]\}}
+\NormalTok{    columns }\OperatorTok{=}\NormalTok{ [i[}\DecValTok{0}\NormalTok{] }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ AVAILABLE_EVALUATIONS]}
+\NormalTok{    df }\OperatorTok{=}\NormalTok{ DataFrame(raw_data, columns }\OperatorTok{=}\NormalTok{ columns)}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\BuiltInTok{len}\NormalTok{(kor_text_all)):}
+        \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{==} \DecValTok{1056}\NormalTok{: }\ControlFlowTok{continue}
+\NormalTok{        summarizer_builder }\OperatorTok{=}\NormalTok{ b}
+\NormalTok{        parser }\OperatorTok{=}\NormalTok{ PlaintextParser(kor_text_all[i], Tokenizer(}\StringTok{'korean'}\NormalTok{))}
+
+\NormalTok{        summarizer }\OperatorTok{=}\NormalTok{ summarizer_builder(parser, }\StringTok{'korean'}\NormalTok{)}
+\NormalTok{        document }\OperatorTok{=}\NormalTok{ parser.document}
+\NormalTok{        items_count }\OperatorTok{=}\NormalTok{ ItemsCount(}\DecValTok{2}\NormalTok{)}
+\NormalTok{        reference_summary }\OperatorTok{=}\NormalTok{ kor_reference_all[i]}
+\NormalTok{        evaluated_sentences }\OperatorTok{=}\NormalTok{ summarizer(document, items_count)}
+\NormalTok{        reference_document }\OperatorTok{=}\NormalTok{ PlaintextParser.from_string(reference_summary,Tokenizer(}\StringTok{"korean"}\NormalTok{))}
+\NormalTok{        reference_sentences }\OperatorTok{=}\NormalTok{ reference_document.document.sentences}
+\NormalTok{        raw_data }\OperatorTok{=}\NormalTok{ \{\}}
+        \ControlFlowTok{for}\NormalTok{ name, evaluate_document, evaluate }\KeywordTok{in}\NormalTok{ AVAILABLE_EVALUATIONS:}
+            \ControlFlowTok{if}\NormalTok{ evaluate_document:}
+\NormalTok{                result }\OperatorTok{=}\NormalTok{ evaluate(evaluated_sentences, document.sentences)}
+            \ControlFlowTok{else}\NormalTok{:}
+                \ControlFlowTok{try}\NormalTok{ :}
+\NormalTok{                    result }\OperatorTok{=}\NormalTok{ evaluate(evaluated_sentences, reference_sentences)}
+                \ControlFlowTok{except}\NormalTok{ :}
+                    \ControlFlowTok{break}
+\NormalTok{            raw_data[name]}\OperatorTok{=}\BuiltInTok{float}\NormalTok{(result)}
+        \ControlFlowTok{if}\NormalTok{(}\BuiltInTok{len}\NormalTok{(raw_data) }\OperatorTok{==} \DecValTok{11}\NormalTok{):}
+\NormalTok{            df.loc[}\BuiltInTok{len}\NormalTok{(df)] }\OperatorTok{=}\NormalTok{ raw_data}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"================================ "}\OperatorTok{+}\NormalTok{ a }\OperatorTok{+} \StringTok{" done! =============================="}\NormalTok{)}
+\NormalTok{    df.to_csv(names)}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{uxd55cuxad6duxc5b4-uxc54cuxace0uxb9acuxc998uxbcc4-uxadf8uxb798uxd504}{%
+\subsection{한국어 알고리즘별
+그래프}\label{uxd55cuxad6duxc5b4-uxc54cuxace0uxb9acuxc998uxbcc4-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{col} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{AVAILABLE\PYZus{}EVALUATIONS}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} luhn}
+         \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}luhn.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}luhn}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}luhn} \PY{o}{=} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} edmundson}
+         \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}edmundson.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}edmundson}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}edmundson} \PY{o}{=} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} lsa}
+         \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}lsa.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}lsa}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}lsa} \PY{o}{=} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} text\PYZhy{}rank}
+         \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}text\PYZhy{}rank.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}text\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} lex\PYZhy{}rank}
+         \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}lex\PYZhy{}rank.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}lex\PYZus{}rank} \PY{o}{=} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} sum\PYZhy{}basic}
+         \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}sum\PYZhy{}basic.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}sum\PYZus{}basic} \PY{o}{=} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}kl}
+         \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor\PYZus{}result\PYZus{}kl.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{n}{col}
+         \PY{n}{static\PYZus{}kl}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{static\PYZus{}kl} \PY{o}{=} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unit overlap (document)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rouge\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-19-33b400cc4e69> in <module>
+          3 static\_luhn = static\_luhn.drop(0,0)
+          4 static\_luhn = static\_luhn.drop(0,1)
+    ----> 5 static\_luhn.columns=col
+          6 static\_luhn[col] = static\_luhn[col].astype(float)
+          7 static\_luhn = static\_luhn.drop(['Precision', 'Recall', 'F-score', 'Cosine similarity', 'Unit overlap', 'Unit overlap (document)', 'Rouge-2'], 1)
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py in \_\_setattr\_\_(self, name, value)
+       4387         try:
+       4388             object.\_\_getattribute\_\_(self, name)
+    -> 4389             return object.\_\_setattr\_\_(self, name, value)
+       4390         except AttributeError:
+       4391             pass
+
+
+        pandas/\_libs/properties.pyx in pandas.\_libs.properties.AxisProperty.\_\_set\_\_()
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py in \_set\_axis(self, axis, labels)
+        644 
+        645     def \_set\_axis(self, axis, labels):
+    --> 646         self.\_data.set\_axis(axis, labels)
+        647         self.\_clear\_item\_cache()
+        648 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/internals.py in set\_axis(self, axis, new\_labels)
+       3314 
+       3315     def set\_axis(self, axis, new\_labels):
+    -> 3316         new\_labels = \_ensure\_index(new\_labels)
+       3317         old\_len = len(self.axes[axis])
+       3318         new\_len = len(new\_labels)
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py in \_ensure\_index(index\_like, copy)
+       4972             index\_like = copy(index\_like)
+       4973 
+    -> 4974     return Index(index\_like)
+       4975 
+       4976 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py in \_\_new\_\_(cls, data, dtype, copy, name, fastpath, tupleize\_cols, **kwargs)
+        435                          **kwargs)
+        436         elif data is None or is\_scalar(data):
+    --> 437             cls.\_scalar\_data\_error(data)
+        438         else:
+        439             if tupleize\_cols and is\_list\_like(data):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py in \_scalar\_data\_error(cls, data)
+        895         raise TypeError('\{0\}({\ldots}) must be called with a collection of some '
+        896                         'kind, \{1\} was passed'.format(cls.\_\_name\_\_,
+    --> 897                                                       repr(data)))
+        898 
+        899     @classmethod
+
+
+        TypeError: Index({\ldots}) must be called with a collection of some kind, 'Rouge-L (Summary Level)' was passed
+
+    \end{Verbatim}
+
+    \hypertarget{luhn-uxadf8uxb798uxd504}{%
+\subsection{luhn 그래프}\label{luhn-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}luhn}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor luhn }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{edmundson-uxadf8uxb798uxd504}{%
+\subsection{edmundson 그래프}\label{edmundson-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}edmundson}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor edmundson }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{lsa-uxadf8uxb798uxd504}{%
+\subsection{lsa 그래프}\label{lsa-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}lsa}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor lsa }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{text-rank-uxadf8uxb798uxd504}{%
+\subsection{text-rank 그래프}\label{text-rank-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}text\PYZus{}rank}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor text\PYZhy{}rank }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{lex-rank-uxadf8uxb798uxd504}{%
+\subsection{lex-rank 그래프}\label{lex-rank-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}lex\PYZus{}rank}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor lex\PYZhy{}rank }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{sum-basic-uxadf8uxb798uxd504}{%
+\subsection{sum-basic 그래프}\label{sum-basic-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}sum\PYZus{}basic}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor sum\PYZhy{}basic }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{kl-uxadf8uxb798uxd504}{%
+\subsection{kl 그래프}\label{kl-uxadf8uxb798uxd504}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{static\PYZus{}kl}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{col}\PY{p}{]}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{x}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{rv} \PY{o}{=} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{std}\PY{p}{)}
+            
+            \PY{n}{mean} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mu}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{rv}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m=}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ s=}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigma}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kor kl }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

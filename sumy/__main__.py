@@ -66,10 +66,11 @@ AVAILABLE_METHODS = {
 def main(args=None):
     args = docopt(to_string(__doc__), args, version=__version__)
     summarizer, parser, items_count = handle_arguments(args)
-    
+    i=0
     for sentence in summarizer(parser.document, items_count):
+        i += 1
         if PY3:
-              print(to_unicode(sentence),"\n")
+              print(to_unicode(sentence))
         else:
             print(to_bytes(sentence))
 

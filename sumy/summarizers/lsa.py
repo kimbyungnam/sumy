@@ -35,11 +35,13 @@ class LsaSummarizer(AbstractSummarizer):
     def __call__(self, document, sentences_count):
         self._ensure_dependecies_installed()
 
+#         print("docu?: ",document,"\n")
         dictionary = self._create_dictionary(document)
         # empty document
         if not dictionary:
             return ()
 
+#         print("doc: ",document,"\ndic: ",dictionary,"\n")
         matrix = self._create_matrix(document, dictionary)
         matrix = self._compute_term_frequency(matrix)
         u, sigma, v = singular_value_decomposition(matrix, full_matrices=False)

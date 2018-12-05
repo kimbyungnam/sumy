@@ -88,7 +88,6 @@ def _recon_lcs(x, y):
     :returns sequence: LCS of x and y
     """
     table = _lcs(x, y)
-
     def _recon(i, j):
         if i == 0 or j == 0:
             return []
