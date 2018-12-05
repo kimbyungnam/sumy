@@ -22,12 +22,10 @@ class HtmlParser(DocumentParser):
 
     @classmethod
     def from_string(cls, string, url, tokenizer):
-        print("string cls : ",cls,"\n")
         return cls(string, tokenizer, url)
 
     @classmethod
     def from_file(cls, file_path, url, tokenizer):
-        print("file cls : ",cls,"\n")
         with open(file_path, "rb") as file:
             return cls(file.read(), tokenizer, url)
 
@@ -102,7 +100,4 @@ class HtmlParser(DocumentParser):
             test += len(sentences)
             paragraphs.append(Paragraph(sentences))
         
-        if test < 10:
-            print("10 문장 이하는 처리하지 않습니다\n")
-            exit(1)
         return ObjectDocumentModel(paragraphs)

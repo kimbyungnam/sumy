@@ -36,7 +36,6 @@ def f_score(evaluated_sentences, reference_sentences, weight=1.0):
 
 
 def precision(evaluated_sentences, reference_sentences):
-    print("pr_refer: \n",reference_sentences,"\nprec_eval:\n",evaluated_sentences,"\n")
     """
     Intrinsic method of evaluation for extracts. It is computed as
     P(E) = A / B, where:
@@ -73,7 +72,6 @@ def recall(evaluated_sentences, reference_sentences):
 
 
 def _divide_evaluation(numerator_sentences, denominator_sentences):
-    print("numer: \n",numerator_sentences,"\ndenomi: \n",denominator_sentences,"\n")
     denominator_sentences = frozenset(denominator_sentences)
     numerator_sentences = frozenset(numerator_sentences)
 
