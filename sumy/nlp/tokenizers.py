@@ -99,7 +99,7 @@ class Tokenizer(object):
         if language in self.SPECIAL_SENTENCE_TOKENIZERS:
             return self.SPECIAL_SENTENCE_TOKENIZERS[language]
         try:
-            path = to_string("/home/dvlab/nltk_data/tokenizers/punkt/%s.pickle") % to_string(language)
+            path = to_string("tokenizers/punkt/%s.pickle") % to_string(language)
             return nltk.data.load(path)
         except (LookupError, zipfile.BadZipfile):
             raise LookupError(
